@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'controllers/bluetooth_controller.dart';
 import 'views/welcome_screen.dart';
+import 'views/welcome_check_screen.dart';
 import 'views/finding_device_screen.dart';
 import 'views/device_confirmation_screen.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -26,9 +27,10 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => WelcomeScreen(),
+          '/welcome_check': (context) => WelcomeCheckScreen(
+              nickname: ModalRoute.of(context)!.settings.arguments as String),
           '/finding': (context) => BluetoothAdapterStateObserver(),
           '/confirmation': (context) => DeviceConfirmationScreen(),
-          // '/main': (context) => MainScreen(),
         },
       ),
     );
