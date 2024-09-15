@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => WelcomeScreen(),
           '/finding': (context) => BluetoothAdapterStateObserver(),
           '/confirmation': (context) => DeviceConfirmationScreen(),
+          // '/main': (context) => MainScreen(),
         },
       ),
     );

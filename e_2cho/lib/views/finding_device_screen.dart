@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/bluetooth_controller.dart';
 import '../models/device_model.dart';
+import 'dart:async';
 
 class FindingDeviceScreen extends StatefulWidget {
   @override
@@ -9,14 +10,22 @@ class FindingDeviceScreen extends StatefulWidget {
 }
 
 class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
+  bool _canNavigate = false;
+
   @override
   void initState() {
     super.initState();
-    // 화면이 빌드된 후 스캔 시작
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final bluetoothController =
           Provider.of<BluetoothController>(context, listen: false);
       bluetoothController.startScan();
+
+      // 5초 후에 _canNavigate를 true로 설정
+      Timer(Duration(seconds: 5), () {
+        setState(() {
+          _canNavigate = true;
+        });
+      });
     });
   }
 
@@ -83,8 +92,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
           ),
           Consumer<BluetoothController>(
             builder: (context, controller, child) {
-              if (controller.devices.isNotEmpty) {
-                // 기기를 찾으면 자동으로 다음 화면으로 이동
+              if (_canNavigate && controller.devices.isNotEmpty) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushNamed(
                     context,
@@ -103,7 +111,6 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
 
   @override
   void dispose() {
-    // 화면을 나갈 때 스캔 중지
     final bluetoothController =
         Provider.of<BluetoothController>(context, listen: false);
     bluetoothController.stopScan();

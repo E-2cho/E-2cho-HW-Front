@@ -12,18 +12,16 @@ class BluetoothService {
 
   Future<void> startScan() async {
     if (await FlutterBluePlus.adapterState.first == BluetoothAdapterState.on) {
-      // Clear previously discovered devices
       _discoveredDevices.clear();
 
-      // Start scanning
       await FlutterBluePlus.startScan(timeout: Duration(seconds: 4));
 
-      // Listen to scan results
       FlutterBluePlus.scanResults.listen((results) {
         for (ScanResult r in results) {
           DeviceModel device = DeviceModel.fromScanResult(r);
-          if (device.name.startsWith('e2cho-') &&
+          if (device.name.toLowerCase().startsWith('e_2cho') &&
               !_discoveredDevices.contains(device)) {
+            print('Found e_2cho device: ${device.name}'); // 디버그 로그 추가
             _discoveredDevices.add(device);
             _devicesStreamController.add(_discoveredDevices);
           }
@@ -40,7 +38,6 @@ class BluetoothService {
 
   Future<void> connectToDevice(DeviceModel device) async {
     try {
-      await FlutterBluePlus.stopScan();
       await device.device.connect();
       device.isConnected = true;
       _devicesStreamController.add(_discoveredDevices);

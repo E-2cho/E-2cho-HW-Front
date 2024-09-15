@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import '../models/device_model.dart';
+import '../controllers/bluetooth_controller.dart';
+import 'package:provider/provider.dart';
 
 class DeviceConfirmationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final DeviceModel device =
+        ModalRoute.of(context)!.settings.arguments as DeviceModel;
+
     return Scaffold(
-      backgroundColor: Color(0xFF1A143C), // 배경색 설정
+      backgroundColor: Color(0xFF1A143C),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -20,7 +26,7 @@ class DeviceConfirmationScreen extends StatelessWidget {
             ),
             SizedBox(height: 60),
             Image.asset(
-              'assets/image_processing20200321-12730-646x6f.gif', // Flutter에서는 이미지 경로를 assets로 지정
+              'assets/image_processing20200321-12730-646x6f.gif',
               width: 350,
               height: 246,
             ),
@@ -35,7 +41,7 @@ class DeviceConfirmationScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('[디바이스 이름]',
+                    Text(device.name,
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black54,
@@ -56,7 +62,7 @@ class DeviceConfirmationScreen extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF1F0F2A), // 버튼 배경색
+                          backgroundColor: Color(0xFF1F0F2A),
                           padding: EdgeInsets.zero,
                           alignment: Alignment.center,
                           shape: RoundedRectangleBorder(
@@ -64,7 +70,12 @@ class DeviceConfirmationScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          // 버튼 클릭 이벤트 처리
+                          final controller = Provider.of<BluetoothController>(
+                              context,
+                              listen: false);
+                          controller.connectToDevice(device);
+                          // 연결 후 다음 화면으로 이동
+                          Navigator.pushNamed(context, '/main');
                         },
                         child: Text(
                           '예',
@@ -82,7 +93,7 @@ class DeviceConfirmationScreen extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey[300], // 버튼 배경색
+                          backgroundColor: Colors.grey[300],
                           padding: EdgeInsets.zero,
                           alignment: Alignment.center,
                           shape: RoundedRectangleBorder(
@@ -90,7 +101,8 @@ class DeviceConfirmationScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          // 버튼 클릭 이벤트 처리
+                          // 다시 기기 찾기 화면으로 돌아가기
+                          Navigator.pop(context);
                         },
                         child: Text(
                           '아니오',

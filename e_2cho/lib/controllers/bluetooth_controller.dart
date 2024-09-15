@@ -18,6 +18,7 @@ class BluetoothController extends ChangeNotifier {
   BluetoothController() {
     _deviceSubscription = _bluetoothService.scannedDevices.listen((devices) {
       _devices = devices;
+      print('Devices updated: ${_devices.length}'); // 디버그 로그 추가
       notifyListeners();
     });
   }
