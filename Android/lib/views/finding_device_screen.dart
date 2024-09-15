@@ -20,7 +20,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
           Provider.of<BluetoothController>(context, listen: false);
       bluetoothController.startScan();
 
-      // 5초 후에 _canNavigate를 true로 설정
+      // 5초 후에 _canNavigate를 true로 설정 t
       Timer(Duration(seconds: 5), () {
         setState(() {
           _canNavigate = true;
