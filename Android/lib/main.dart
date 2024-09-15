@@ -1,3 +1,4 @@
+import 'package:e_2cho/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'controllers/bluetooth_controller.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
               nickname: ModalRoute.of(context)!.settings.arguments as String),
           '/finding': (context) => BluetoothAdapterStateObserver(),
           '/confirmation': (context) => DeviceConfirmationScreen(),
+          '/main': (context) => HomeScreen(),
         },
       ),
     );
