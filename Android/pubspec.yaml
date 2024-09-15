@@ -1,4 +1,4 @@
-name: untitled
+name: e_2cho
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_blue_plus: ^1.32.12
+  get: ^4.6.6
+  provider: ^6.1.2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -52,6 +55,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -59,22 +63,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/jigubon.png
-     - assets/device-locator-image-for-e2cho-app--isometric-3d-illustration-style--central-smartphone-with-e2-77421105_1.jpeg
-     - assets/icegif-1204.gif
-     - assets/image_processing20200321-12730-646x6f.gif
-     - assets/loading.gif
-     - assets/backgroundHome.png
-     - assets/img.png
-     - assets/jiguAndBooks.png
-     - assets/rfrfrfrf.png
-     - assets/weather.png
-     - assets/munzi.png
-     - assets/fortune.png
-     - assets/bluetoothIcon.png
-     - assets/img_1.png
-     - assets/img_2.png
-  #   - images/a_dot_ham.jpeg
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
