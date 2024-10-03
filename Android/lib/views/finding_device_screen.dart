@@ -11,7 +11,8 @@ class FindingDeviceScreen extends StatefulWidget {
 
 class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
   bool _canNavigate = false;
-
+  // bool _canNavigate = false;
+  bool _hasNavigated = false;
   @override
   void initState() {
     super.initState();
@@ -92,9 +93,13 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
           ),
           Consumer<BluetoothController>(
             builder: (context, controller, child) {
-              if (_canNavigate && controller.devices.isNotEmpty) {
+              if (_canNavigate &&
+                  controller.devices.isNotEmpty &&
+                  !_hasNavigated) {
+                _hasNavigated = true;
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                  Navigator.pushNamed(
+                  controller.stopScan();
+                  Navigator.pushReplacementNamed(
                     context,
                     '/confirmation',
                     arguments: controller.devices.first,
