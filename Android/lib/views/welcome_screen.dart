@@ -29,7 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               width: 216,
               height: 239,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 50),
             Text(
               'Welcome to',
               style: TextStyle(
@@ -47,7 +47,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 80),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 78),
               child: TextField(
@@ -60,51 +60,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 style: TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 78,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: '생년',
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  width: 78,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: '월',
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  width: 78,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: '일',
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 70),
+            SizedBox(height: 80),
+
             SizedBox(
               width: 260,
               height: 40,

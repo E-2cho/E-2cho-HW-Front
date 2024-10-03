@@ -1,3 +1,4 @@
+import 'package:e_2cho/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'controllers/bluetooth_controller.dart';
@@ -8,7 +9,7 @@ import 'views/device_confirmation_screen.dart';
 import 'views/home_screen.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-void main() {
+void main() 
   WidgetsFlutterBinding.ensureInitialized();
   FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true);
   runApp(MyApp());
