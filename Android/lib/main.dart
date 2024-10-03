@@ -6,9 +6,10 @@ import 'views/welcome_screen.dart';
 import 'views/welcome_check_screen.dart';
 import 'views/finding_device_screen.dart';
 import 'views/device_confirmation_screen.dart';
+import 'views/home_screen.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-void main() {
+void main() 
   WidgetsFlutterBinding.ensureInitialized();
   FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true);
   runApp(MyApp());
@@ -32,8 +33,7 @@ class MyApp extends StatelessWidget {
               nickname: ModalRoute.of(context)!.settings.arguments as String),
           '/finding': (context) => BluetoothAdapterStateObserver(),
           '/confirmation': (context) => DeviceConfirmationScreen(),
-          '/main': (context) => HomeScreen(),
-
+          '/HomeScreen': (context) => HomeScreen()
         },
       ),
     );

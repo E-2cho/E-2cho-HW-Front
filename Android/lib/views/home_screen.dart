@@ -87,8 +87,8 @@ class HomeScreenState extends State<HomeScreen> {
                                   Align(
                                     alignment: Alignment.bottomLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 20, bottom: 30),
+                                      padding:
+                                          EdgeInsets.only(left: 20, bottom: 30),
                                       child: Text(
                                         '미세먼지 모드',
                                         style: TextStyle(
@@ -123,8 +123,8 @@ class HomeScreenState extends State<HomeScreen> {
                                   Align(
                                     alignment: Alignment.bottomLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 20, bottom: 30),
+                                      padding:
+                                          EdgeInsets.only(left: 20, bottom: 30),
                                       child: Text(
                                         '기후 모드',
                                         style: TextStyle(
@@ -164,8 +164,8 @@ class HomeScreenState extends State<HomeScreen> {
                                   Align(
                                     alignment: Alignment.bottomLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 20, bottom: 30),
+                                      padding:
+                                          EdgeInsets.only(left: 20, bottom: 30),
                                       child: Text(
                                         '온도 모드',
                                         style: TextStyle(
@@ -200,8 +200,8 @@ class HomeScreenState extends State<HomeScreen> {
                                   Align(
                                     alignment: Alignment.bottomLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 20, bottom: 30),
+                                      padding:
+                                          EdgeInsets.only(left: 20, bottom: 30),
                                       child: Text(
                                         '예약 모드',
                                         style: TextStyle(
@@ -250,7 +250,7 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           Positioned(
               left: 30,
-              top : 320,
+              top: 320,
               child: SizedBox(
                 width: 150,
                 height: 43,
@@ -258,13 +258,12 @@ class HomeScreenState extends State<HomeScreen> {
                     value: sliderValue,
                     min: 0,
                     max: 100,
-                    onChanged: (double value){
+                    onChanged: (double value) {
                       setState(() {
                         sliderValue = value;
                       });
                     }),
-              )
-          ),
+              )),
           // 다른 이미지 요소들 배치
           Positioned(
             left: 90,

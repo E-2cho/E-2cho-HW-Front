@@ -74,8 +74,9 @@ class DeviceConfirmationScreen extends StatelessWidget {
                               context,
                               listen: false);
                           controller.connectToDevice(device);
-                          // 연결 후 다음 화면으로 이동
-                          Navigator.pushNamed(context, '/main');
+                          controller.resetDeviceList(); // 새로 추가된 메서드
+                          Navigator.pushReplacementNamed(
+                              context, '/HomeScreen');
                         },
                         child: Text(
                           '예',

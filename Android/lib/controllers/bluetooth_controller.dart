@@ -70,6 +70,11 @@ class BluetoothController extends ChangeNotifier {
     }
   }
 
+  void resetDeviceList() {
+    _devices.clear();
+    notifyListeners();
+  }
+
   bool isDeviceConnected() {
     return _selectedDevice?.isConnected ?? false;
   }

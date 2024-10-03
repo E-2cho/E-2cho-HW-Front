@@ -19,7 +19,8 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final double listWidth = MediaQuery.of(context).size.width * 0.9; // 리스트의 너비 설정
+    final double listWidth =
+        MediaQuery.of(context).size.width * 0.9; // 리스트의 너비 설정
 
     return Scaffold(
       backgroundColor: Color(0xFF1A143C),
@@ -32,7 +33,8 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
               style: TextStyle(
                 fontSize: 36,
                 color: Colors.teal,
-                fontWeight: FontWeight.bold,),
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 50),
             Container(
@@ -53,7 +55,8 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           // 체크박스 상태 업데이트
-                          isChecked = List<bool>.filled(devices.length, false); // 다른 항목을 선택하면 모두 해제
+                          isChecked = List<bool>.filled(
+                              devices.length, false); // 다른 항목을 선택하면 모두 해제
                           isChecked[index] = value!;
                         });
                       },
@@ -80,11 +83,7 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
                   print('Selected device: ${devices[isChecked.indexOf(true)]}');
                 },
                 child: Text('연결하기',
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white
-                    )
-                ),
+                    style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
             ),
           ],
