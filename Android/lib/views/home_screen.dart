@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  HomeScreenState createState() => HomeScreenState();
+}
+
+class HomeScreenState extends State<HomeScreen> {
+  double sliderValue = 50.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +47,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
+
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(height: 115),
+                      SizedBox(height: 85),
                       Row(
                         children: [
                           SizedBox(width: 23),
@@ -159,7 +167,7 @@ class HomeScreen extends StatelessWidget {
                                       padding: EdgeInsets.only(
                                           left: 20, bottom: 30),
                                       child: Text(
-                                        '운세 모드',
+                                        '온도 모드',
                                         style: TextStyle(
                                           fontSize: 16,
                                           color: Colors.white,
@@ -195,7 +203,7 @@ class HomeScreen extends StatelessWidget {
                                       padding: EdgeInsets.only(
                                           left: 20, bottom: 30),
                                       child: Text(
-                                        '기기 다시 찾기',
+                                        '예약 모드',
                                         style: TextStyle(
                                           fontSize: 16,
                                           color: Colors.white,
@@ -209,11 +217,53 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ],
                       ),
+                      SizedBox(height: 20),
+                      SizedBox(
+                        width: 180,
+                        height: 35,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF63CE67),
+                            padding: EdgeInsets.zero,
+                            alignment: Alignment.center,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          onPressed: () {
+                            // 버튼 클릭 이벤트 처리
+                          },
+                          child: Text(
+                            '다른 기기 연결하기',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
+          ),
+          Positioned(
+              left: 30,
+              top : 320,
+              child: SizedBox(
+                width: 150,
+                height: 43,
+                child: Slider(
+                    value: sliderValue,
+                    min: 0,
+                    max: 100,
+                    onChanged: (double value){
+                      setState(() {
+                        sliderValue = value;
+                      });
+                    }),
+              )
           ),
           // 다른 이미지 요소들 배치
           Positioned(
@@ -238,7 +288,7 @@ class HomeScreen extends StatelessWidget {
           // 기타 이미지 배치
           Positioned(
             left: 40,
-            top: 435,
+            top: 420,
             child: Image.asset(
               'assets/munzi.png',
               width: 69,
@@ -247,7 +297,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Positioned(
             left: 43,
-            top: 610,
+            top: 595,
             child: Image.asset(
               'assets/fortune.png',
               width: 30,
@@ -256,7 +306,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Positioned(
             left: 235,
-            top: 610,
+            top: 595,
             child: Image.asset(
               'assets/bluetoothIcon.png',
               width: 30,
@@ -265,7 +315,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Positioned(
             left: 235,
-            top: 435,
+            top: 420,
             child: Image.asset(
               'assets/weather.png',
               width: 30,
@@ -274,7 +324,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Positioned(
             left: 345,
-            top: 430,
+            top: 400,
             child: Image.asset(
               'assets/img_2.png',
               width: 30,
@@ -283,7 +333,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Positioned(
             left: 150,
-            top: 600,
+            top: 570,
             child: Image.asset(
               'assets/img_2.png',
               width: 30,
@@ -292,7 +342,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Positioned(
             left: 345,
-            top: 600,
+            top: 570,
             child: Image.asset(
               'assets/img_2.png',
               width: 30,
@@ -301,7 +351,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Positioned(
             left: 150,
-            top: 430,
+            top: 400,
             child: Image.asset(
               'assets/img_2.png',
               width: 30,
