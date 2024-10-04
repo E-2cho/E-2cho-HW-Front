@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class WelcomeCheckScreen extends StatelessWidget {
   final String nickname;
 
-  const WelcomeCheckScreen({required this.nickname});
+  const WelcomeCheckScreen({super.key, required this.nickname});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1A143C),
+      backgroundColor: const Color(0xFF1A143C),
       body: Stack(
         children: [
           Positioned(
@@ -29,7 +29,7 @@ class WelcomeCheckScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text(
+                  child: const Text(
                     '<',
                     style: TextStyle(
                       fontSize: 20,
@@ -51,20 +51,20 @@ class WelcomeCheckScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(nickname,
                     style: TextStyle(
                       fontSize: 36,
                       color: Colors.greenAccent[400],
                       fontWeight: FontWeight.bold,
                     )),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Image.asset(
                   'assets/icegif-1204.gif',
                   width: 414,
                   height: 314,
                 ),
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 SizedBox(
                   width: 260,
                   height: 40,
@@ -80,7 +80,7 @@ class WelcomeCheckScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, '/finding');
                     },
-                    child: Text(
+                    child: const Text(
                       '기기 찾기',
                       style: TextStyle(
                         fontSize: 16,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DeviceSelectionPage extends StatefulWidget {
+  const DeviceSelectionPage({super.key});
+
   @override
   _DeviceSelectionPageState createState() => _DeviceSelectionPageState();
 }
@@ -23,12 +25,12 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
         MediaQuery.of(context).size.width * 0.9; // 리스트의 너비 설정
 
     return Scaffold(
-      backgroundColor: Color(0xFF1A143C),
+      backgroundColor: const Color(0xFF1A143C),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center, // 모든 요소를 가운데 정렬
           children: <Widget>[
-            Text(
+            const Text(
               '기기를 선택하세요',
               style: TextStyle(
                 fontSize: 36,
@@ -36,11 +38,11 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Container(
               width: listWidth, // 리스트의 너비 설정
               height: 500, // 리스트 높이 설정
-              color: Color(0xFFF0EDED),
+              color: const Color(0xFFF0EDED),
               child: ListView.builder(
                 itemCount: devices.length,
                 itemBuilder: (context, index) {
@@ -65,7 +67,7 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
                 },
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             SizedBox(
               width: 260,
               height: 40,
@@ -82,7 +84,7 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
                   // 연결하기 버튼 클릭 시 실행할 동작
                   print('Selected device: ${devices[isChecked.indexOf(true)]}');
                 },
-                child: Text('연결하기',
+                child: const Text('연결하기',
                     style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
             ),

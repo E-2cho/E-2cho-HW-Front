@@ -4,19 +4,21 @@ import '../controllers/bluetooth_controller.dart';
 import 'package:provider/provider.dart';
 
 class DeviceConfirmationScreen extends StatelessWidget {
+  const DeviceConfirmationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final DeviceModel device =
         ModalRoute.of(context)!.settings.arguments as DeviceModel;
 
     return Scaffold(
-      backgroundColor: Color(0xFF1A143C),
+      backgroundColor: const Color(0xFF1A143C),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               '기기를 찾았습니다!',
               style: TextStyle(
                 fontSize: 36,
@@ -24,13 +26,13 @@ class DeviceConfirmationScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
             Image.asset(
               'assets/image_processing20200321-12730-646x6f.gif',
               width: 350,
               height: 246,
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Container(
                 width: 350,
                 height: 260,
@@ -42,13 +44,13 @@ class DeviceConfirmationScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(device.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           color: Colors.black54,
                           fontWeight: FontWeight.bold,
                         )),
-                    SizedBox(height: 5),
-                    Text(
+                    const SizedBox(height: 5),
+                    const Text(
                       '이 기기가 맞나요?',
                       style: TextStyle(
                         fontSize: 24,
@@ -56,13 +58,13 @@ class DeviceConfirmationScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     SizedBox(
                       width: 260,
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF1F0F2A),
+                          backgroundColor: const Color(0xFF1F0F2A),
                           padding: EdgeInsets.zero,
                           alignment: Alignment.center,
                           shape: RoundedRectangleBorder(
@@ -88,7 +90,7 @@ class DeviceConfirmationScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     SizedBox(
                       width: 260,
                       height: 50,

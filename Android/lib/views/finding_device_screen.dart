@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/bluetooth_controller.dart';
-import '../models/device_model.dart';
 import 'dart:async';
 
 class FindingDeviceScreen extends StatefulWidget {
+  const FindingDeviceScreen({super.key});
+
   @override
   _FindingDeviceScreenState createState() => _FindingDeviceScreenState();
 }
@@ -22,7 +23,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
       bluetoothController.startScan();
 
       // 5초 후에 _canNavigate를 true로 설정 t
-      Timer(Duration(seconds: 5), () {
+      Timer(const Duration(seconds: 5), () {
         setState(() {
           _canNavigate = true;
         });
@@ -33,7 +34,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1F0F2A),
+      backgroundColor: const Color(0xFF1F0F2A),
       body: Stack(
         children: [
           Positioned(
@@ -54,7 +55,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text(
+                child: const Text(
                   '<',
                   style: TextStyle(
                     fontSize: 20,
@@ -74,15 +75,15 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
                   width: 414,
                   height: 339,
                 ),
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 Image.asset(
                   'assets/loading.gif',
                   width: 45,
                   height: 45,
                   fit: BoxFit.cover,
                 ),
-                SizedBox(height: 50),
-                Text('기기 찾는 중..',
+                const SizedBox(height: 50),
+                const Text('기기 찾는 중..',
                     style: TextStyle(
                       fontSize: 40,
                       color: Colors.green,
@@ -106,7 +107,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
                   );
                 });
               }
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             },
           ),
         ],

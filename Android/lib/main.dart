@@ -6,16 +6,17 @@ import 'views/welcome_screen.dart';
 import 'views/welcome_check_screen.dart';
 import 'views/finding_device_screen.dart';
 import 'views/device_confirmation_screen.dart';
-import 'views/home_screen.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-void main() 
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true);
+  FlutterBluePlus.setLogLevel(LogLevel.verbose, color : true);
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -28,12 +29,12 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => WelcomeScreen(),
+          '/': (context) => const WelcomeScreen(),
           '/welcome_check': (context) => WelcomeCheckScreen(
               nickname: ModalRoute.of(context)!.settings.arguments as String),
-          '/finding': (context) => BluetoothAdapterStateObserver(),
-          '/confirmation': (context) => DeviceConfirmationScreen(),
-          '/HomeScreen': (context) => HomeScreen()
+          '/finding': (context) => const BluetoothAdapterStateObserver(),
+          '/confirmation': (context) => const DeviceConfirmationScreen(),
+          '/HomeScreen': (context) => const HomeScreen()
         },
       ),
     );
@@ -41,6 +42,8 @@ class MyApp extends StatelessWidget {
 }
 
 class BluetoothAdapterStateObserver extends StatelessWidget {
+  const BluetoothAdapterStateObserver({super.key});
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<BluetoothAdapterState>(
@@ -49,7 +52,7 @@ class BluetoothAdapterStateObserver extends StatelessWidget {
       builder: (c, snapshot) {
         final adapterState = snapshot.data;
         if (adapterState == BluetoothAdapterState.on) {
-          return FindingDeviceScreen();
+          return const FindingDeviceScreen();
         }
         return BluetoothOffScreen(adapterState: adapterState);
       },
@@ -58,8 +61,7 @@ class BluetoothAdapterStateObserver extends StatelessWidget {
 }
 
 class BluetoothOffScreen extends StatelessWidget {
-  const BluetoothOffScreen({Key? key, required this.adapterState})
-      : super(key: key);
+  const BluetoothOffScreen({super.key, required this.adapterState});
 
   final BluetoothAdapterState? adapterState;
 
@@ -71,7 +73,7 @@ class BluetoothOffScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Icon(
+            const Icon(
               Icons.bluetooth_disabled,
               size: 200.0,
               color: Colors.white54,
