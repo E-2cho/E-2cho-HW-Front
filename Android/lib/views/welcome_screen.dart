@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+
+
 class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -23,13 +27,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 100),
+            const SizedBox(height: 100),
             Image.asset(
               'assets/jigubon.png',
               width: 216,
               height: 239,
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Text(
               'Welcome to',
               style: TextStyle(
@@ -38,7 +42,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'E^2cho',
               style: TextStyle(
@@ -47,20 +51,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 80),
+            const SizedBox(height: 80),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 78),
               child: TextField(
                 controller: _nicknameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '닉네임',
                   filled: true,
                   fillColor: Colors.white,
                 ),
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: const TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
-            SizedBox(height: 80),
+            const SizedBox(height: 80),
 
             SizedBox(
               width: 260,
@@ -78,7 +82,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Navigator.pushNamed(context, '/welcome_check',
                       arguments: _nicknameController.text);
                 },
-                child: Text(
+                child: const Text(
                   '등록하기',
                   style: TextStyle(
                     fontSize: 16,
