@@ -99,6 +99,7 @@ class HomeScreenState extends State<HomeScreen> {
                               ),
                               onPressed: () {
                                 // 버튼 클릭 이벤트 처리
+                                print('버튼이 클릭되었습니다!');
                               },
                               child: const Stack(
                                 children: [

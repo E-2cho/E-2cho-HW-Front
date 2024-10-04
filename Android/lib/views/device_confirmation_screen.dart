@@ -3,13 +3,22 @@ import '../models/device_model.dart';
 import '../controllers/bluetooth_controller.dart';
 import 'package:provider/provider.dart';
 
-class DeviceConfirmationScreen extends StatelessWidget {
+class DeviceConfirmationScreen extends StatefulWidget {
   const DeviceConfirmationScreen({super.key});
+
+  @override
+  _DeviceConfirmationScreen createState() => _DeviceConfirmationScreen();
+}
+
+class _DeviceConfirmationScreen extends State<DeviceConfirmationScreen> {
 
   @override
   Widget build(BuildContext context) {
     final DeviceModel device =
         ModalRoute.of(context)!.settings.arguments as DeviceModel;
+
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: const Color(0xFF1A143C),
@@ -26,16 +35,24 @@ class DeviceConfirmationScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 60),
+            Padding(
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.05, // 화면 위쪽에 패딩
+              ),
+            ),
             Image.asset(
               'assets/image_processing20200321-12730-646x6f.gif',
-              width: 350,
-              height: 246,
+              width: screenWidth * 0.8,
+              height: screenHeight * 0.35,
             ),
-            const SizedBox(height: 50),
+            Padding(
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.05, // 화면 위쪽에 패딩
+              ),
+            ),
             Container(
-                width: 350,
-                height: 260,
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.3,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15)),
@@ -49,7 +66,11 @@ class DeviceConfirmationScreen extends StatelessWidget {
                           color: Colors.black54,
                           fontWeight: FontWeight.bold,
                         )),
-                    const SizedBox(height: 5),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: screenHeight * 0.01, // 화면 위쪽에 패딩
+                      ),
+                    ),
                     const Text(
                       '이 기기가 맞나요?',
                       style: TextStyle(
@@ -58,10 +79,14 @@ class DeviceConfirmationScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: screenHeight * 0.02, // 화면 위쪽에 패딩
+                      ),
+                    ),
                     SizedBox(
-                      width: 260,
-                      height: 50,
+                      width: screenWidth * 0.7,
+                      height: screenHeight * 0.05,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF1F0F2A),
@@ -90,7 +115,11 @@ class DeviceConfirmationScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: screenHeight * 0.01, // 화면 위쪽에 패딩
+                      ),
+                    ),
                     SizedBox(
                       width: 260,
                       height: 50,

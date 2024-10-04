@@ -1,3 +1,4 @@
+import 'package:e_2cho/views/device_selection_page.dart';
 import 'package:e_2cho/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,8 +34,9 @@ class MyApp extends StatelessWidget {
           '/welcome_check': (context) => WelcomeCheckScreen(
               nickname: ModalRoute.of(context)!.settings.arguments as String),
           '/finding': (context) => const BluetoothAdapterStateObserver(),
+          '/find_and_select': (context) => const DeviceSelectionPage(),
           '/confirmation': (context) => const DeviceConfirmationScreen(),
-          '/HomeScreen': (context) => const HomeScreen()
+          '/HomeScreen': (context) => const HomeScreen(),
         },
       ),
     );
