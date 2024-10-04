@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
+import '../models/device_model.dart';
 
 class DeviceSelectionPage extends StatefulWidget {
+  final List<DeviceModel> devices;
+
+  DeviceSelectionPage({required this.devices});
+
   @override
   _DeviceSelectionPageState createState() => _DeviceSelectionPageState();
 }
 
 class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
-  // 리스트에 표시할 기기명과 체크박스 상태를 저장
-  final List<String> devices = ['Device 1', 'Device 2', 'Device 3'];
   List<bool> isChecked = [];
 
   @override
   void initState() {
     super.initState();
-    // 초기 체크 상태 설정 (모두 false로)
-    isChecked = List<bool>.filled(devices.length, false);
+    isChecked = List<bool>.filled(widget.devices.length, false);
   }
 
   @override
   Widget build(BuildContext context) {
-    final double listWidth =
-        MediaQuery.of(context).size.width * 0.9; // 리스트의 너비 설정
+    final double listWidth = MediaQuery.of(context).size.width * 0.9;
 
     return Scaffold(
       backgroundColor: Color(0xFF1A143C),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // 모든 요소를 가운데 정렬
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               '기기를 선택하세요',
@@ -38,25 +39,22 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
             ),
             SizedBox(height: 50),
             Container(
-              width: listWidth, // 리스트의 너비 설정
-              height: 500, // 리스트 높이 설정
+              width: listWidth,
+              height: 500,
               color: Color(0xFFF0EDED),
               child: ListView.builder(
-                itemCount: devices.length,
+                itemCount: widget.devices.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(
-                      devices[index],
-                    ),
+                    title: Text(widget.devices[index].name),
                     trailing: Checkbox(
                       value: isChecked[index],
                       activeColor: Colors.deepPurple,
                       checkColor: Colors.white,
                       onChanged: (bool? value) {
                         setState(() {
-                          // 체크박스 상태 업데이트
-                          isChecked = List<bool>.filled(
-                              devices.length, false); // 다른 항목을 선택하면 모두 해제
+                          isChecked =
+                              List<bool>.filled(widget.devices.length, false);
                           isChecked[index] = value!;
                         });
                       },
@@ -71,7 +69,7 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
               height: 40,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal[700], // 버튼 배경색
+                  backgroundColor: Colors.teal[700],
                   padding: EdgeInsets.zero,
                   alignment: Alignment.center,
                   shape: RoundedRectangleBorder(
@@ -79,8 +77,18 @@ class _DeviceSelectionPageState extends State<DeviceSelectionPage> {
                   ),
                 ),
                 onPressed: () {
-                  // 연결하기 버튼 클릭 시 실행할 동작
-                  print('Selected device: ${devices[isChecked.indexOf(true)]}');
+                  int selectedIndex = isChecked.indexOf(true);
+                  if (selectedIndex != -1) {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      '/confirmation',
+                      arguments: widget.devices[selectedIndex],
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('기기를 선택해주세요')),
+                    );
+                  }
                 },
                 child: Text('연결하기',
                     style: TextStyle(fontSize: 16, color: Colors.white)),
