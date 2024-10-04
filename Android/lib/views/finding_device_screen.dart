@@ -33,16 +33,20 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: const Color(0xFF1F0F2A),
       body: Stack(
         children: [
           Positioned(
-            left: 15,
-            top: 40,
+            left: screenWidth * 0.04,
+            top: screenHeight * 0.04,
             child: SizedBox(
-              width: 35,
-              height: 35,
+              width: screenWidth * 0.08,
+              height: screenWidth * 0.08,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey,
@@ -72,23 +76,32 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
               children: [
                 Image.asset(
                   'assets/device-locator-image-for-e2cho-app--isometric-3d-illustration-style--central-smartphone-with-e2-77421105_1.jpeg',
-                  width: 414,
-                  height: 339,
+                  width: screenWidth,
+                  height: screenHeight * 0.35,
                 ),
-                const SizedBox(height: 60),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.05, // 화면 위쪽에 패딩
+                  ),
+                ),
                 Image.asset(
                   'assets/loading.gif',
-                  width: 45,
-                  height: 45,
+                  width: screenWidth * 0.1,
+                  height: screenWidth * 0.1,
                   fit: BoxFit.cover,
                 ),
-                const SizedBox(height: 50),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.05, // 화면 위쪽에 패딩
+                  ),
+                ),
                 const Text('기기 찾는 중..',
                     style: TextStyle(
                       fontSize: 40,
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
-                    )),
+                    )
+                ),
               ],
             ),
           ),

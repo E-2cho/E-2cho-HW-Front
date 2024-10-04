@@ -7,16 +7,20 @@ class WelcomeCheckScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: const Color(0xFF1A143C),
       body: Stack(
         children: [
           Positioned(
-              left: 15,
-              top: 40,
+              left: screenWidth * 0.05,
+              top: screenHeight * 0.05,
               child: SizedBox(
-                width: 35,
-                height: 35,
+                width: screenWidth * 0.08,
+                height: screenWidth * 0.08,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey,
@@ -43,6 +47,11 @@ class WelcomeCheckScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.04, // 화면 위쪽에 패딩
+                  ),
+                ),
                 Text(
                   '환영합니다',
                   style: TextStyle(
@@ -51,23 +60,26 @@ class WelcomeCheckScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 10),
                 Text(nickname,
                     style: TextStyle(
                       fontSize: 36,
                       color: Colors.greenAccent[400],
                       fontWeight: FontWeight.bold,
                     )),
-                const SizedBox(height: 40),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.04, // 화면 위쪽에 패딩
+                  ),
+                ),
                 Image.asset(
                   'assets/icegif-1204.gif',
-                  width: 414,
-                  height: 314,
+                  width: screenWidth,
+                  height: screenHeight * 0.43,
                 ),
                 const SizedBox(height: 60),
                 SizedBox(
-                  width: 260,
-                  height: 40,
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.06,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal[700],
