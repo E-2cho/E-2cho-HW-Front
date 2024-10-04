@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8cfef373-7e19-4195-a981-b8edaac2a7a8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Android/lib/views/device_selection_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Android/lib/views/device_selection_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Android/lib/views/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Android/lib/views/home_screen.dart" afterDir="false" />

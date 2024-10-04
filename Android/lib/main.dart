@@ -8,10 +8,36 @@ import 'views/welcome_check_screen.dart';
 import 'views/finding_device_screen.dart';
 import 'views/device_confirmation_screen.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
+
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterBluePlus.setLogLevel(LogLevel.verbose, color : true);
+  FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true);
+
+  // Android 초기화 설정
+  const AndroidInitializationSettings initializationSettingsAndroid =
+  AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  // 초기화 설정
+  const InitializationSettings initializationSettings =
+  InitializationSettings(android: initializationSettingsAndroid);
+
+  // 초기화
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) async {
+        // 알림 선택 시 실행할 코드
+        String? payload = response.payload;
+        print("Selected Notification Payload: $payload");
+        // 여기에서 원하는 작업을 수행하세요
+      });
+
+  // 알림 채널 생성
+  await _createNotificationChannel();
+
   runApp(MyApp());
 }
 
@@ -92,4 +118,21 @@ class BluetoothOffScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+// 알림 채널 생성 함수
+Future<void> _createNotificationChannel() async {
+  const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    '0', // 채널 ID
+    'Mode', // 채널 이름
+    description: 'Mode', // 채널 설명
+    importance: Importance.high, // 중요도 설정
+    playSound: false, // 소리 재생 여부
+    showBadge: true, // 배지 표시 여부
+  );
+
+  // 채널 생성
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
 }

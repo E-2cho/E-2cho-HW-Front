@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import '../main.dart'; // 알림 플러그인 가져오기
+import 'package:permission_handler/permission_handler.dart'; // 권한 요청을 위한 패키지
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,6 +12,43 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   double sliderValue = 50.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _requestNotificationPermissions(); // 알림 권한 요청
+  }
+
+  Future<void> _requestNotificationPermissions() async {
+    var status = await Permission.notification.status;
+    if (!status.isGranted) {
+      await Permission.notification.request();
+    }
+  }
+
+  Future<void> _showNotification(String mode) async {
+    print('Showing notification for mode: $mode');
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+    AndroidNotificationDetails(
+      '0', // 여기에 위에서 설정한 채널 ID를 사용합니다.
+      'Mode',
+      channelDescription: 'Mode',
+      importance: Importance.max,
+      priority: Priority.high,
+      showWhen: false,
+    );
+
+    const NotificationDetails platformChannelSpecifics =
+    NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.show(
+      0, // 알림 ID
+      '활성 모드', // 제목
+      '$mode 실행 중', // 내용
+      platformChannelSpecifics,
+      payload: mode,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +139,7 @@ class HomeScreenState extends State<HomeScreen> {
                               ),
                               onPressed: () {
                                 // 버튼 클릭 이벤트 처리
-                                print('버튼이 클릭되었습니다!');
+                                _showNotification('미세먼지 모드');
                               },
                               child: const Stack(
                                 children: [
@@ -139,7 +179,7 @@ class HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               onPressed: () {
-                                // 버튼 클릭 이벤트 처리
+                                _showNotification('기후 모드');
                               },
                               child: const Stack(
                                 children: [
@@ -188,7 +228,7 @@ class HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               onPressed: () {
-                                // 버튼 클릭 이벤트 처리
+                                _showNotification('온도 모드');
                               },
                               child: const Stack(
                                 children: [
@@ -228,7 +268,7 @@ class HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               onPressed: () {
-                                // 버튼 클릭 이벤트 처리
+                                _showNotification('예약 모드');
                               },
                               child: const Stack(
                                 children: [
@@ -281,7 +321,6 @@ class HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),
@@ -289,7 +328,7 @@ class HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-              left: screenWidth * 0.05,
+              left: screenWidth * 0.07,
               top: screenHeight * 0.36,
               child: SizedBox(
                 width: screenWidth * 0.35,
@@ -304,129 +343,135 @@ class HomeScreenState extends State<HomeScreen> {
                       });
                     }),
               )),
-          // 다른 이미지 요소들 배치
-          Positioned(
-              left: screenWidth * 0.3,
-              top: screenHeight * 0.05,
-              child: SizedBox(
-                width: screenWidth * 0.7,
-                height: screenHeight * 0.4,
-                child: Image.asset(
-                  'assets/img.png',
-                  width: screenWidth * 0.7,
-                  height: screenHeight * 0.4,
-                  fit: BoxFit.fill,
-                ),
-              )
-          ),
-          // 추가 이미지 요소들
-          Positioned(
-              left: 0,
-              top: screenHeight * 0.05,
-              child: SizedBox(
-                width: screenWidth,
-                height: screenHeight * 0.95,
-                child: Image.asset(
-                  'assets/grass.png',
-                  width: screenWidth,
-                  height: screenHeight,
-                  fit: BoxFit.fill,
-                ),
-              )
-          ),
-          // 기타 이미지 배치
-          Positioned(
-              left: screenWidth * 0.1,
-              top: screenHeight * 0.45,
-              child: SizedBox(
-                width: screenWidth * 0.15,
-                height: screenWidth * 0.15,
-                child: Image.asset(
-                  'assets/munzi.png',
-                  width: 30,
-                  height: 30,
-                  fit: BoxFit.contain,
-                ),
-              )
-          ),
-          Positioned(
-              left: screenWidth * 0.11,
-              top: screenHeight * 0.65,
-              child: SizedBox(
-                width: screenWidth * 0.05,
-                height: screenWidth * 0.05,
-                child: Image.asset(
-                  'assets/fortune.png',
-                  width: 30,
-                  height: 30,
-                  fit: BoxFit.contain,
-                ),
-              )
-          ),
-          Positioned(
-              left: screenWidth * 0.58,
-              top: screenHeight * 0.65,
-              child: SizedBox(
-                width: screenWidth * 0.05,
-                height: screenWidth * 0.05,
-                child: Image.asset(
-                  'assets/bluetoothIcon.png',
-                  width: 30,
-                  height: 30,
-                  fit: BoxFit.contain,
-                ),
-              )
-          ),
-          Positioned(
-              left: screenWidth * 0.58,
-              top: screenHeight * 0.45,
-              child: SizedBox(
-                width: screenWidth * 0.07,
-                height: screenWidth * 0.07,
-                child: Image.asset(
-                  'assets/weather.png',
-                  width: 30,
-                  height: 30,
-                  fit: BoxFit.contain,
-                ),
-              )
-          ),
-          Positioned(
-            left: screenWidth * 0.84,
-            top: screenHeight * 0.44,
-            child: Image.asset(
-              'assets/img_2.png',
-              width: screenWidth * 0.07,
-              height: screenWidth * 0.07,
-            ),
-          ),
-          Positioned(
-            left: screenWidth * 0.37,
-            top: screenHeight * 0.63,
-            child: Image.asset(
-              'assets/img_2.png',
-              width: screenWidth * 0.07,
-              height: screenWidth * 0.07,
-            ),
-          ),
-          Positioned(
-            left: screenWidth * 0.84,
-            top: screenHeight * 0.63,
-            child: Image.asset(
-              'assets/img_2.png',
-              width: screenWidth * 0.07,
-              height: screenWidth * 0.07,
-            ),
-          ),
-          Positioned(
-            left: screenWidth * 0.37,
-            top: screenHeight * 0.44,
-            child: Image.asset(
-              'assets/img_2.png',
-              width: screenWidth * 0.07,
-              height: screenWidth * 0.07,
-            ),
-          ),
+         IgnorePointer(
+           child: Stack(
+             children: [
+               // 다른 이미지 요소들 배치
+               Positioned(
+                   left: screenWidth * 0.3,
+                   top: screenHeight * 0.05,
+                   child: SizedBox(
+                     width: screenWidth * 0.7,
+                     height: screenHeight * 0.4,
+                     child: Image.asset(
+                       'assets/img.png',
+                       width: screenWidth * 0.7,
+                       height: screenHeight * 0.4,
+                       fit: BoxFit.fill,
+                     ),
+                   )
+               ),
+               // 추가 이미지 요소들
+               Positioned(
+                   left: 0,
+                   top: screenHeight * 0.05,
+                   child: SizedBox(
+                     width: screenWidth,
+                     height: screenHeight * 0.95,
+                     child: Image.asset(
+                       'assets/grass.png',
+                       width: screenWidth,
+                       height: screenHeight,
+                       fit: BoxFit.fill,
+                     ),
+                   )
+               ),
+               // 기타 이미지 배치
+               Positioned(
+                   left: screenWidth * 0.1,
+                   top: screenHeight * 0.45,
+                   child: SizedBox(
+                     width: screenWidth * 0.15,
+                     height: screenWidth * 0.15,
+                     child: Image.asset(
+                       'assets/munzi.png',
+                       width: 30,
+                       height: 30,
+                       fit: BoxFit.contain,
+                     ),
+                   )
+               ),
+               Positioned(
+                   left: screenWidth * 0.11,
+                   top: screenHeight * 0.65,
+                   child: SizedBox(
+                     width: screenWidth * 0.05,
+                     height: screenWidth * 0.05,
+                     child: Image.asset(
+                       'assets/fortune.png',
+                       width: 30,
+                       height: 30,
+                       fit: BoxFit.contain,
+                     ),
+                   )
+               ),
+               Positioned(
+                   left: screenWidth * 0.58,
+                   top: screenHeight * 0.65,
+                   child: SizedBox(
+                     width: screenWidth * 0.05,
+                     height: screenWidth * 0.05,
+                     child: Image.asset(
+                       'assets/bluetoothIcon.png',
+                       width: 30,
+                       height: 30,
+                       fit: BoxFit.contain,
+                     ),
+                   )
+               ),
+               Positioned(
+                   left: screenWidth * 0.58,
+                   top: screenHeight * 0.45,
+                   child: SizedBox(
+                     width: screenWidth * 0.07,
+                     height: screenWidth * 0.07,
+                     child: Image.asset(
+                       'assets/weather.png',
+                       width: 30,
+                       height: 30,
+                       fit: BoxFit.contain,
+                     ),
+                   )
+               ),
+               Positioned(
+                 left: screenWidth * 0.84,
+                 top: screenHeight * 0.44,
+                 child: Image.asset(
+                   'assets/img_2.png',
+                   width: screenWidth * 0.07,
+                   height: screenWidth * 0.07,
+                 ),
+               ),
+               Positioned(
+                 left: screenWidth * 0.37,
+                 top: screenHeight * 0.63,
+                 child: Image.asset(
+                   'assets/img_2.png',
+                   width: screenWidth * 0.07,
+                   height: screenWidth * 0.07,
+                 ),
+               ),
+               Positioned(
+                 left: screenWidth * 0.84,
+                 top: screenHeight * 0.63,
+                 child: Image.asset(
+                   'assets/img_2.png',
+                   width: screenWidth * 0.07,
+                   height: screenWidth * 0.07,
+                 ),
+               ),
+               Positioned(
+                 left: screenWidth * 0.37,
+                 top: screenHeight * 0.44,
+                 child: Image.asset(
+                   'assets/img_2.png',
+                   width: screenWidth * 0.07,
+                   height: screenWidth * 0.07,
+                 ),
+               ),
+             ],
+           ),
+         )
         ],
       ),
     );
