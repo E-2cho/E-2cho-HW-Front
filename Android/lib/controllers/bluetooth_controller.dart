@@ -70,6 +70,12 @@ class BluetoothController extends ChangeNotifier {
     }
   }
 
+  List<DeviceModel> getE2choDevices() {
+    return _devices
+        .where((device) => device.name.toLowerCase().startsWith('e_2cho'))
+        .toList();
+  }
+
   void resetDeviceList() {
     _devices.clear();
     notifyListeners();

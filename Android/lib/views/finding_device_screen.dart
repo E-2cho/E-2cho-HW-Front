@@ -1,3 +1,4 @@
+import 'package:e_2cho/views/device_selection_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/bluetooth_controller.dart';
@@ -11,8 +12,8 @@ class FindingDeviceScreen extends StatefulWidget {
 
 class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
   bool _canNavigate = false;
-  // bool _canNavigate = false;
   bool _hasNavigated = false;
+
   @override
   void initState() {
     super.initState();
@@ -21,8 +22,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
           Provider.of<BluetoothController>(context, listen: false);
       bluetoothController.startScan();
 
-      // 5초 후에 _canNavigate를 true로 설정 t
-      Timer(Duration(seconds: 5), () {
+      Timer(Duration(seconds: 10), () {
         setState(() {
           _canNavigate = true;
         });
@@ -93,17 +93,31 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
           ),
           Consumer<BluetoothController>(
             builder: (context, controller, child) {
-              if (_canNavigate &&
-                  controller.devices.isNotEmpty &&
-                  !_hasNavigated) {
+              if (_canNavigate && !_hasNavigated) {
                 _hasNavigated = true;
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   controller.stopScan();
-                  Navigator.pushReplacementNamed(
-                    context,
-                    '/confirmation',
-                    arguments: controller.devices.first,
-                  );
+                  List<DeviceModel> e2choDevices = controller.getE2choDevices();
+                  if (e2choDevices.length >= 2) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            DeviceSelectionPage(devices: e2choDevices),
+                      ),
+                    );
+                  } else if (e2choDevices.length == 1) {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      '/confirmation',
+                      arguments: e2choDevices.first,
+                    );
+                  } else {
+                    // e2choDevices가 비어있을 때의 처리
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('E2cho 디바이스를 찾지 못했습니다.')),
+                    );
+                  }
                 });
               }
               return SizedBox.shrink();
