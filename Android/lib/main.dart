@@ -1,5 +1,3 @@
-import 'package:e_2cho/views/device_selection_page.dart';
-import 'package:e_2cho/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'controllers/bluetooth_controller.dart';
@@ -7,33 +5,47 @@ import 'views/welcome_screen.dart';
 import 'views/welcome_check_screen.dart';
 import 'views/finding_device_screen.dart';
 import 'views/device_confirmation_screen.dart';
+import 'views/home_screen.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
-
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true);
 
   // Android 초기화 설정
   const AndroidInitializationSettings initializationSettingsAndroid =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  // iOS 초기화 설정 추가
+  final DarwinInitializationSettings initializationSettingsIOS =
+      DarwinInitializationSettings(
+    requestAlertPermission: true,
+    requestBadgePermission: true,
+    requestSoundPermission: true,
+  );
 
   // 초기화 설정
-  const InitializationSettings initializationSettings =
-  InitializationSettings(android: initializationSettingsAndroid);
-
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+    iOS: initializationSettingsIOS,
+  );
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+  );
   // 초기화
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse response) async {
-        // 알림 선택 시 실행할 코드
-        String? payload = response.payload;
-        print("Selected Notification Payload: $payload");
-        // 여기에서 원하는 작업을 수행하세요
-      });
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+    onDidReceiveNotificationResponse: (NotificationResponse response) async {
+      // 알림 선택 시 실행할 코드
+      String? payload = response.payload;
+      print("Selected Notification Payload: $payload");
+      // 여기에서 원하는 작업을 수행하세요
+    },
+  );
 
   // 알림 채널 생성
   await _createNotificationChannel();
@@ -42,8 +54,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -56,13 +66,12 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => const WelcomeScreen(),
+          '/': (context) => WelcomeScreen(),
           '/welcome_check': (context) => WelcomeCheckScreen(
               nickname: ModalRoute.of(context)!.settings.arguments as String),
-          '/finding': (context) => const BluetoothAdapterStateObserver(),
-          '/find_and_select': (context) => const DeviceSelectionPage(),
-          '/confirmation': (context) => const DeviceConfirmationScreen(),
-          '/HomeScreen': (context) => const HomeScreen(),
+          '/finding': (context) => BluetoothAdapterStateObserver(),
+          '/confirmation': (context) => DeviceConfirmationScreen(),
+          '/HomeScreen': (context) => HomeScreen()
         },
       ),
     );
@@ -70,8 +79,6 @@ class MyApp extends StatelessWidget {
 }
 
 class BluetoothAdapterStateObserver extends StatelessWidget {
-  const BluetoothAdapterStateObserver({super.key});
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<BluetoothAdapterState>(
@@ -80,7 +87,7 @@ class BluetoothAdapterStateObserver extends StatelessWidget {
       builder: (c, snapshot) {
         final adapterState = snapshot.data;
         if (adapterState == BluetoothAdapterState.on) {
-          return const FindingDeviceScreen();
+          return FindingDeviceScreen();
         }
         return BluetoothOffScreen(adapterState: adapterState);
       },
@@ -89,7 +96,8 @@ class BluetoothAdapterStateObserver extends StatelessWidget {
 }
 
 class BluetoothOffScreen extends StatelessWidget {
-  const BluetoothOffScreen({super.key, required this.adapterState});
+  const BluetoothOffScreen({Key? key, required this.adapterState})
+      : super(key: key);
 
   final BluetoothAdapterState? adapterState;
 
@@ -101,7 +109,7 @@ class BluetoothOffScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Icon(
+            Icon(
               Icons.bluetooth_disabled,
               size: 200.0,
               color: Colors.white54,
@@ -133,6 +141,7 @@ Future<void> _createNotificationChannel() async {
 
   // 채널 생성
   await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 }

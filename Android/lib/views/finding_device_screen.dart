@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/bluetooth_controller.dart';
+import '../models/device_model.dart';
 import 'dart:async';
+import 'package:e_2cho/views/device_selection_page.dart';
 
 class FindingDeviceScreen extends StatefulWidget {
   const FindingDeviceScreen({super.key});
@@ -12,8 +14,8 @@ class FindingDeviceScreen extends StatefulWidget {
 
 class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
   bool _canNavigate = false;
-  // bool _canNavigate = false;
   bool _hasNavigated = false;
+
   @override
   void initState() {
     super.initState();
@@ -22,7 +24,6 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
           Provider.of<BluetoothController>(context, listen: false);
       bluetoothController.startScan();
 
-      // 5초 후에 _canNavigate를 true로 설정 t
       Timer(const Duration(seconds: 5), () {
         setState(() {
           _canNavigate = true;
@@ -33,7 +34,6 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -81,7 +81,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: screenHeight * 0.05, // 화면 위쪽에 패딩
+                    top: screenHeight * 0.05,
                   ),
                 ),
                 Image.asset(
@@ -92,7 +92,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: screenHeight * 0.05, // 화면 위쪽에 패딩
+                    top: screenHeight * 0.05,
                   ),
                 ),
                 const Text('기기 찾는 중..',
@@ -100,24 +100,36 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
                       fontSize: 40,
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
-                    )
-                ),
+                    )),
               ],
             ),
           ),
           Consumer<BluetoothController>(
             builder: (context, controller, child) {
-              if (_canNavigate &&
-                  controller.devices.isNotEmpty &&
-                  !_hasNavigated) {
+              if (_canNavigate && !_hasNavigated) {
                 _hasNavigated = true;
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   controller.stopScan();
-                  Navigator.pushReplacementNamed(
-                    context,
-                    '/confirmation',
-                    arguments: controller.devices.first,
-                  );
+                  List<DeviceModel> e2choDevices = controller.getE2choDevices();
+                  if (e2choDevices.length >= 2) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            DeviceSelectionPage(devices: e2choDevices),
+                      ),
+                    );
+                  } else if (e2choDevices.length == 1) {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      '/confirmation',
+                      arguments: e2choDevices.first,
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('E2cho 디바이스를 찾지 못했습니다.')),
+                    );
+                  }
                 });
               }
               return const SizedBox.shrink();

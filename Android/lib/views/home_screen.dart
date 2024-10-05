@@ -29,7 +29,7 @@ class HomeScreenState extends State<HomeScreen> {
   Future<void> _showNotification(String mode) async {
     print('Showing notification for mode: $mode');
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
-    AndroidNotificationDetails(
+        AndroidNotificationDetails(
       '0', // 여기에 위에서 설정한 채널 ID를 사용합니다.
       'Mode',
       channelDescription: 'Mode',
@@ -39,7 +39,7 @@ class HomeScreenState extends State<HomeScreen> {
     );
 
     const NotificationDetails platformChannelSpecifics =
-    NotificationDetails(android: androidPlatformChannelSpecifics);
+        NotificationDetails(android: androidPlatformChannelSpecifics);
 
     await flutterLocalNotificationsPlugin.show(
       0, // 알림 ID
@@ -52,7 +52,6 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -101,7 +100,7 @@ class HomeScreenState extends State<HomeScreen> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                    top: screenHeight * 0.2, // 화면 위쪽에 패딩
+                    top: screenHeight * 0.2,
                   ),
                 ),
                 Container(
@@ -115,7 +114,7 @@ class HomeScreenState extends State<HomeScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                          top: screenHeight * 0.07, // 화면 위쪽에 패딩
+                          top: screenHeight * 0.07,
                         ),
                       ),
                       Row(
@@ -138,7 +137,6 @@ class HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               onPressed: () {
-                                // 버튼 클릭 이벤트 처리
                                 _showNotification('미세먼지 모드');
                               },
                               child: const Stack(
@@ -147,7 +145,7 @@ class HomeScreenState extends State<HomeScreen> {
                                     alignment: Alignment.bottomLeft,
                                     child: Padding(
                                       padding:
-                                      EdgeInsets.only(left: 20, bottom: 30),
+                                          EdgeInsets.only(left: 20, bottom: 30),
                                       child: Text(
                                         '미세먼지 모드',
                                         style: TextStyle(
@@ -187,7 +185,7 @@ class HomeScreenState extends State<HomeScreen> {
                                     alignment: Alignment.bottomLeft,
                                     child: Padding(
                                       padding:
-                                      EdgeInsets.only(left: 20, bottom: 30),
+                                          EdgeInsets.only(left: 20, bottom: 30),
                                       child: Text(
                                         '기후 모드',
                                         style: TextStyle(
@@ -205,7 +203,7 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                          top: screenHeight * 0.03, // 화면 위아래 패딩
+                          top: screenHeight * 0.03,
                         ),
                       ),
                       Row(
@@ -236,7 +234,7 @@ class HomeScreenState extends State<HomeScreen> {
                                     alignment: Alignment.bottomLeft,
                                     child: Padding(
                                       padding:
-                                      EdgeInsets.only(left: 20, bottom: 30),
+                                          EdgeInsets.only(left: 20, bottom: 30),
                                       child: Text(
                                         '온도 모드',
                                         style: TextStyle(
@@ -276,7 +274,7 @@ class HomeScreenState extends State<HomeScreen> {
                                     alignment: Alignment.bottomLeft,
                                     child: Padding(
                                       padding:
-                                      EdgeInsets.only(left: 20, bottom: 30),
+                                          EdgeInsets.only(left: 20, bottom: 30),
                                       child: Text(
                                         '예약 모드',
                                         style: TextStyle(
@@ -294,7 +292,7 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                          vertical: screenHeight * 0.01, // 화면 위쪽에 패딩
+                          vertical: screenHeight * 0.01,
                         ),
                       ),
                       SizedBox(
@@ -343,135 +341,126 @@ class HomeScreenState extends State<HomeScreen> {
                       });
                     }),
               )),
-         IgnorePointer(
-           child: Stack(
-             children: [
-               // 다른 이미지 요소들 배치
-               Positioned(
-                   left: screenWidth * 0.3,
-                   top: screenHeight * 0.05,
-                   child: SizedBox(
-                     width: screenWidth * 0.7,
-                     height: screenHeight * 0.4,
-                     child: Image.asset(
-                       'assets/img.png',
-                       width: screenWidth * 0.7,
-                       height: screenHeight * 0.4,
-                       fit: BoxFit.fill,
-                     ),
-                   )
-               ),
-               // 추가 이미지 요소들
-               Positioned(
-                   left: 0,
-                   top: screenHeight * 0.05,
-                   child: SizedBox(
-                     width: screenWidth,
-                     height: screenHeight * 0.95,
-                     child: Image.asset(
-                       'assets/grass.png',
-                       width: screenWidth,
-                       height: screenHeight,
-                       fit: BoxFit.fill,
-                     ),
-                   )
-               ),
-               // 기타 이미지 배치
-               Positioned(
-                   left: screenWidth * 0.1,
-                   top: screenHeight * 0.45,
-                   child: SizedBox(
-                     width: screenWidth * 0.15,
-                     height: screenWidth * 0.15,
-                     child: Image.asset(
-                       'assets/munzi.png',
-                       width: 30,
-                       height: 30,
-                       fit: BoxFit.contain,
-                     ),
-                   )
-               ),
-               Positioned(
-                   left: screenWidth * 0.11,
-                   top: screenHeight * 0.65,
-                   child: SizedBox(
-                     width: screenWidth * 0.05,
-                     height: screenWidth * 0.05,
-                     child: Image.asset(
-                       'assets/fortune.png',
-                       width: 30,
-                       height: 30,
-                       fit: BoxFit.contain,
-                     ),
-                   )
-               ),
-               Positioned(
-                   left: screenWidth * 0.58,
-                   top: screenHeight * 0.65,
-                   child: SizedBox(
-                     width: screenWidth * 0.05,
-                     height: screenWidth * 0.05,
-                     child: Image.asset(
-                       'assets/bluetoothIcon.png',
-                       width: 30,
-                       height: 30,
-                       fit: BoxFit.contain,
-                     ),
-                   )
-               ),
-               Positioned(
-                   left: screenWidth * 0.58,
-                   top: screenHeight * 0.45,
-                   child: SizedBox(
-                     width: screenWidth * 0.07,
-                     height: screenWidth * 0.07,
-                     child: Image.asset(
-                       'assets/weather.png',
-                       width: 30,
-                       height: 30,
-                       fit: BoxFit.contain,
-                     ),
-                   )
-               ),
-               Positioned(
-                 left: screenWidth * 0.84,
-                 top: screenHeight * 0.44,
-                 child: Image.asset(
-                   'assets/img_2.png',
-                   width: screenWidth * 0.07,
-                   height: screenWidth * 0.07,
-                 ),
-               ),
-               Positioned(
-                 left: screenWidth * 0.37,
-                 top: screenHeight * 0.63,
-                 child: Image.asset(
-                   'assets/img_2.png',
-                   width: screenWidth * 0.07,
-                   height: screenWidth * 0.07,
-                 ),
-               ),
-               Positioned(
-                 left: screenWidth * 0.84,
-                 top: screenHeight * 0.63,
-                 child: Image.asset(
-                   'assets/img_2.png',
-                   width: screenWidth * 0.07,
-                   height: screenWidth * 0.07,
-                 ),
-               ),
-               Positioned(
-                 left: screenWidth * 0.37,
-                 top: screenHeight * 0.44,
-                 child: Image.asset(
-                   'assets/img_2.png',
-                   width: screenWidth * 0.07,
-                   height: screenWidth * 0.07,
-                 ),
-               ),
-             ],
-           ),
-         )
+          IgnorePointer(
+            child: Stack(
+              children: [
+                Positioned(
+                    left: screenWidth * 0.3,
+                    top: screenHeight * 0.05,
+                    child: SizedBox(
+                      width: screenWidth * 0.7,
+                      height: screenHeight * 0.4,
+                      child: Image.asset(
+                        'assets/img.png',
+                        width: screenWidth * 0.7,
+                        height: screenHeight * 0.4,
+                        fit: BoxFit.fill,
+                      ),
+                    )),
+                Positioned(
+                    left: 0,
+                    top: screenHeight * 0.05,
+                    child: SizedBox(
+                      width: screenWidth,
+                      height: screenHeight * 0.95,
+                      child: Image.asset(
+                        'assets/grass.png',
+                        width: screenWidth,
+                        height: screenHeight,
+                        fit: BoxFit.fill,
+                      ),
+                    )),
+                Positioned(
+                    left: screenWidth * 0.1,
+                    top: screenHeight * 0.45,
+                    child: SizedBox(
+                      width: screenWidth * 0.15,
+                      height: screenWidth * 0.15,
+                      child: Image.asset(
+                        'assets/munzi.png',
+                        width: 30,
+                        height: 30,
+                        fit: BoxFit.contain,
+                      ),
+                    )),
+                Positioned(
+                    left: screenWidth * 0.11,
+                    top: screenHeight * 0.65,
+                    child: SizedBox(
+                      width: screenWidth * 0.05,
+                      height: screenWidth * 0.05,
+                      child: Image.asset(
+                        'assets/fortune.png',
+                        width: 30,
+                        height: 30,
+                        fit: BoxFit.contain,
+                      ),
+                    )),
+                Positioned(
+                    left: screenWidth * 0.58,
+                    top: screenHeight * 0.65,
+                    child: SizedBox(
+                      width: screenWidth * 0.05,
+                      height: screenWidth * 0.05,
+                      child: Image.asset(
+                        'assets/bluetoothIcon.png',
+                        width: 30,
+                        height: 30,
+                        fit: BoxFit.contain,
+                      ),
+                    )),
+                Positioned(
+                    left: screenWidth * 0.58,
+                    top: screenHeight * 0.45,
+                    child: SizedBox(
+                      width: screenWidth * 0.07,
+                      height: screenWidth * 0.07,
+                      child: Image.asset(
+                        'assets/weather.png',
+                        width: 30,
+                        height: 30,
+                        fit: BoxFit.contain,
+                      ),
+                    )),
+                Positioned(
+                  left: screenWidth * 0.84,
+                  top: screenHeight * 0.44,
+                  child: Image.asset(
+                    'assets/img_2.png',
+                    width: screenWidth * 0.07,
+                    height: screenWidth * 0.07,
+                  ),
+                ),
+                Positioned(
+                  left: screenWidth * 0.37,
+                  top: screenHeight * 0.63,
+                  child: Image.asset(
+                    'assets/img_2.png',
+                    width: screenWidth * 0.07,
+                    height: screenWidth * 0.07,
+                  ),
+                ),
+                Positioned(
+                  left: screenWidth * 0.84,
+                  top: screenHeight * 0.63,
+                  child: Image.asset(
+                    'assets/img_2.png',
+                    width: screenWidth * 0.07,
+                    height: screenWidth * 0.07,
+                  ),
+                ),
+                Positioned(
+                  left: screenWidth * 0.37,
+                  top: screenHeight * 0.44,
+                  child: Image.asset(
+                    'assets/img_2.png',
+                    width: screenWidth * 0.07,
+                    height: screenWidth * 0.07,
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

@@ -7,7 +7,6 @@ class WelcomeCheckScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -49,7 +48,7 @@ class WelcomeCheckScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                    top: screenHeight * 0.04, // 화면 위쪽에 패딩
+                    top: screenHeight * 0.04,
                   ),
                 ),
                 Text(
@@ -68,7 +67,7 @@ class WelcomeCheckScreen extends StatelessWidget {
                     )),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: screenHeight * 0.04, // 화면 위쪽에 패딩
+                    top: screenHeight * 0.04,
                   ),
                 ),
                 Image.asset(
@@ -76,7 +75,7 @@ class WelcomeCheckScreen extends StatelessWidget {
                   width: screenWidth,
                   height: screenHeight * 0.43,
                 ),
-                const SizedBox(height: 60),
+                SizedBox(height: screenHeight * 0.06),
                 SizedBox(
                   width: screenWidth * 0.8,
                   height: screenHeight * 0.06,

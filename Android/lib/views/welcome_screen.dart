@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
@@ -20,7 +18,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -33,7 +30,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.05, // 화면 위쪽에 패딩
+                top: screenHeight * 0.05,
               ),
             ),
             Image.asset(
@@ -43,7 +40,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.02, // 화면 위쪽에 패딩
+                top: screenHeight * 0.02,
               ),
             ),
             Text(
@@ -56,7 +53,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.01, // 화면 위쪽에 패딩
+                top: screenHeight * 0.01,
               ),
             ),
             Text(
@@ -69,13 +66,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.08, // 화면 위쪽에 패딩
+                top: screenHeight * 0.08,
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: screenWidth * 0.2
-              ),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2),
               child: TextField(
                 controller: _nicknameController,
                 decoration: const InputDecoration(
@@ -88,10 +83,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.08, // 화면 위쪽에 패딩
+                top: screenHeight * 0.08,
               ),
             ),
-
             SizedBox(
               width: screenWidth * 0.6,
               height: screenHeight * 0.05,

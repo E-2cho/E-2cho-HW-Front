@@ -11,7 +11,6 @@ class DeviceConfirmationScreen extends StatefulWidget {
 }
 
 class _DeviceConfirmationScreen extends State<DeviceConfirmationScreen> {
-
   @override
   Widget build(BuildContext context) {
     final DeviceModel device =
@@ -37,7 +36,7 @@ class _DeviceConfirmationScreen extends State<DeviceConfirmationScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.05, // 화면 위쪽에 패딩
+                top: screenHeight * 0.05,
               ),
             ),
             Image.asset(
@@ -47,7 +46,7 @@ class _DeviceConfirmationScreen extends State<DeviceConfirmationScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.05, // 화면 위쪽에 패딩
+                top: screenHeight * 0.05,
               ),
             ),
             Container(
@@ -68,7 +67,7 @@ class _DeviceConfirmationScreen extends State<DeviceConfirmationScreen> {
                         )),
                     Padding(
                       padding: EdgeInsets.only(
-                        top: screenHeight * 0.01, // 화면 위쪽에 패딩
+                        top: screenHeight * 0.01,
                       ),
                     ),
                     const Text(
@@ -81,7 +80,7 @@ class _DeviceConfirmationScreen extends State<DeviceConfirmationScreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        top: screenHeight * 0.02, // 화면 위쪽에 패딩
+                        top: screenHeight * 0.02,
                       ),
                     ),
                     SizedBox(
@@ -101,7 +100,7 @@ class _DeviceConfirmationScreen extends State<DeviceConfirmationScreen> {
                               context,
                               listen: false);
                           controller.connectToDevice(device);
-                          controller.resetDeviceList(); // 새로 추가된 메서드
+                          controller.resetDeviceList();
                           Navigator.pushReplacementNamed(
                               context, '/HomeScreen');
                         },
@@ -117,12 +116,12 @@ class _DeviceConfirmationScreen extends State<DeviceConfirmationScreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        top: screenHeight * 0.01, // 화면 위쪽에 패딩
+                        top: screenHeight * 0.01,
                       ),
                     ),
                     SizedBox(
-                      width: 260,
-                      height: 50,
+                      width: screenWidth * 0.7,
+                      height: screenHeight * 0.05,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey[300],
@@ -133,7 +132,6 @@ class _DeviceConfirmationScreen extends State<DeviceConfirmationScreen> {
                           ),
                         ),
                         onPressed: () {
-                          // 다시 기기 찾기 화면으로 돌아가기
                           Navigator.pop(context);
                         },
                         child: Text(
