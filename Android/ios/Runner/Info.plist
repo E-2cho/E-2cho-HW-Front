@@ -6,6 +6,13 @@
 	<string></string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>알림에 음악을 사용하기 위해 권한이 필요합니다.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -48,6 +55,7 @@
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
+	
 	<true/>
 </dict>
 </plist>
