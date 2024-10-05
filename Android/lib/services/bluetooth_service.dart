@@ -14,7 +14,7 @@ class BluetoothService {
     if (await FlutterBluePlus.adapterState.first == BluetoothAdapterState.on) {
       _discoveredDevices.clear();
 
-      await FlutterBluePlus.startScan(timeout: Duration(seconds: 4));
+      await FlutterBluePlus.startScan(timeout: const Duration(seconds: 4));
 
       FlutterBluePlus.scanResults.listen((results) {
         for (ScanResult r in results) {
