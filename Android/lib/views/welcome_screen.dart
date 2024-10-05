@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -16,6 +18,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -23,13 +28,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 100),
+            Padding(
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.05,
+              ),
+            ),
             Image.asset(
               'assets/jigubon.png',
-              width: 216,
-              height: 239,
+              width: screenWidth * 0.35,
+              height: screenHeight * 0.35,
             ),
-            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.02,
+              ),
+            ),
             Text(
               'Welcome to',
               style: TextStyle(
@@ -38,7 +51,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            Padding(
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.01,
+              ),
+            ),
             Text(
               'E^2cho',
               style: TextStyle(
@@ -47,81 +64,45 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 30),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 78),
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.08,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2),
               child: TextField(
                 controller: _nicknameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '닉네임',
                   filled: true,
                   fillColor: Colors.white,
                 ),
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: const TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 78,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: '생년',
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  width: 78,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: '월',
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  width: 78,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: '일',
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.08,
+              ),
             ),
-            SizedBox(height: 70),
             SizedBox(
-              width: 260,
-              height: 40,
+              width: screenWidth * 0.6,
+              height: screenHeight * 0.05,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.teal[700],
                   padding: EdgeInsets.zero,
                   alignment: Alignment.center,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, '/welcome_check',
                       arguments: _nicknameController.text);
                 },
-                child: Text(
+                child: const Text(
                   '등록하기',
                   style: TextStyle(
                     fontSize: 16,

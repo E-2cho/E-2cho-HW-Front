@@ -1,11 +1,13 @@
-import 'package:e_2cho/views/device_selection_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/bluetooth_controller.dart';
 import '../models/device_model.dart';
 import 'dart:async';
+import 'package:e_2cho/views/device_selection_page.dart';
 
 class FindingDeviceScreen extends StatefulWidget {
+  const FindingDeviceScreen({super.key});
+
   @override
   _FindingDeviceScreenState createState() => _FindingDeviceScreenState();
 }
@@ -22,7 +24,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
           Provider.of<BluetoothController>(context, listen: false);
       bluetoothController.startScan();
 
-      Timer(Duration(seconds: 10), () {
+      Timer(const Duration(seconds: 5), () {
         setState(() {
           _canNavigate = true;
         });
@@ -32,16 +34,19 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      backgroundColor: Color(0xFF1F0F2A),
+      backgroundColor: const Color(0xFF1F0F2A),
       body: Stack(
         children: [
           Positioned(
-            left: 15,
-            top: 40,
+            left: screenWidth * 0.04,
+            top: screenHeight * 0.04,
             child: SizedBox(
-              width: 35,
-              height: 35,
+              width: screenWidth * 0.08,
+              height: screenWidth * 0.08,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey,
@@ -54,7 +59,7 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text(
+                child: const Text(
                   '<',
                   style: TextStyle(
                     fontSize: 20,
@@ -71,18 +76,26 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
               children: [
                 Image.asset(
                   'assets/device-locator-image-for-e2cho-app--isometric-3d-illustration-style--central-smartphone-with-e2-77421105_1.jpeg',
-                  width: 414,
-                  height: 339,
+                  width: screenWidth,
+                  height: screenHeight * 0.35,
                 ),
-                SizedBox(height: 60),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.05,
+                  ),
+                ),
                 Image.asset(
                   'assets/loading.gif',
-                  width: 45,
-                  height: 45,
+                  width: screenWidth * 0.1,
+                  height: screenWidth * 0.1,
                   fit: BoxFit.cover,
                 ),
-                SizedBox(height: 50),
-                Text('기기 찾는 중..',
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.05,
+                  ),
+                ),
+                const Text('기기 찾는 중..',
                     style: TextStyle(
                       fontSize: 40,
                       color: Colors.green,
@@ -113,14 +126,13 @@ class _FindingDeviceScreenState extends State<FindingDeviceScreen> {
                       arguments: e2choDevices.first,
                     );
                   } else {
-                    // e2choDevices가 비어있을 때의 처리
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('E2cho 디바이스를 찾지 못했습니다.')),
+                      const SnackBar(content: Text('E2cho 디바이스를 찾지 못했습니다.')),
                     );
                   }
                 });
               }
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             },
           ),
         ],

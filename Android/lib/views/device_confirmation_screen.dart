@@ -3,20 +3,30 @@ import '../models/device_model.dart';
 import '../controllers/bluetooth_controller.dart';
 import 'package:provider/provider.dart';
 
-class DeviceConfirmationScreen extends StatelessWidget {
+class DeviceConfirmationScreen extends StatefulWidget {
+  const DeviceConfirmationScreen({super.key});
+
+  @override
+  _DeviceConfirmationScreen createState() => _DeviceConfirmationScreen();
+}
+
+class _DeviceConfirmationScreen extends State<DeviceConfirmationScreen> {
   @override
   Widget build(BuildContext context) {
     final DeviceModel device =
         ModalRoute.of(context)!.settings.arguments as DeviceModel;
 
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      backgroundColor: Color(0xFF1A143C),
+      backgroundColor: const Color(0xFF1A143C),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               '기기를 찾았습니다!',
               style: TextStyle(
                 fontSize: 36,
@@ -24,16 +34,24 @@ class DeviceConfirmationScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 60),
+            Padding(
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.05,
+              ),
+            ),
             Image.asset(
               'assets/image_processing20200321-12730-646x6f.gif',
-              width: 350,
-              height: 246,
+              width: screenWidth * 0.8,
+              height: screenHeight * 0.35,
             ),
-            SizedBox(height: 50),
+            Padding(
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.05,
+              ),
+            ),
             Container(
-                width: 350,
-                height: 260,
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.3,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15)),
@@ -42,13 +60,17 @@ class DeviceConfirmationScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(device.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           color: Colors.black54,
                           fontWeight: FontWeight.bold,
                         )),
-                    SizedBox(height: 5),
-                    Text(
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: screenHeight * 0.01,
+                      ),
+                    ),
+                    const Text(
                       '이 기기가 맞나요?',
                       style: TextStyle(
                         fontSize: 24,
@@ -56,13 +78,17 @@ class DeviceConfirmationScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: screenHeight * 0.02,
+                      ),
+                    ),
                     SizedBox(
-                      width: 260,
-                      height: 50,
+                      width: screenWidth * 0.7,
+                      height: screenHeight * 0.05,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF1F0F2A),
+                          backgroundColor: const Color(0xFF1F0F2A),
                           padding: EdgeInsets.zero,
                           alignment: Alignment.center,
                           shape: RoundedRectangleBorder(
@@ -74,7 +100,7 @@ class DeviceConfirmationScreen extends StatelessWidget {
                               context,
                               listen: false);
                           controller.connectToDevice(device);
-                          controller.resetDeviceList(); // 새로 추가된 메서드
+                          controller.resetDeviceList();
                           Navigator.pushReplacementNamed(
                               context, '/HomeScreen');
                         },
@@ -88,10 +114,14 @@ class DeviceConfirmationScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: screenHeight * 0.01,
+                      ),
+                    ),
                     SizedBox(
-                      width: 260,
-                      height: 50,
+                      width: screenWidth * 0.7,
+                      height: screenHeight * 0.05,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey[300],
@@ -102,7 +132,6 @@ class DeviceConfirmationScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          // 다시 기기 찾기 화면으로 돌아가기
                           Navigator.pop(context);
                         },
                         child: Text(
