@@ -67,8 +67,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => WelcomeScreen(),
-          '/welcome_check': (context) => WelcomeCheckScreen(
-              nickname: ModalRoute.of(context)!.settings.arguments as String),
+          '/welcome_check': (context) => WelcomeCheckScreen(), // 변경된 부분
           '/finding': (context) => BluetoothAdapterStateObserver(),
           '/confirmation': (context) => DeviceConfirmationScreen(),
           '/HomeScreen': (context) => HomeScreen()

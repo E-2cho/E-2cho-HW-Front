@@ -1,8 +1,7 @@
+import 'package:e_2cho/services/user_service.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key});
-
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -18,9 +17,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -28,21 +24,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: EdgeInsets.only(
-                top: screenHeight * 0.05,
-              ),
-            ),
+            SizedBox(height: 100),
             Image.asset(
               'assets/jigubon.png',
-              width: screenWidth * 0.35,
-              height: screenHeight * 0.35,
+              width: 216,
+              height: 239,
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: screenHeight * 0.02,
-              ),
-            ),
+            SizedBox(height: 20),
             Text(
               'Welcome to',
               style: TextStyle(
@@ -51,11 +39,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: screenHeight * 0.01,
-              ),
-            ),
+            SizedBox(height: 10),
             Text(
               'E^2cho',
               style: TextStyle(
@@ -64,48 +48,61 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: 30),
             Padding(
-              padding: EdgeInsets.only(
-                top: screenHeight * 0.08,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
                 controller: _nicknameController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: '닉네임',
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: Colors.grey[200],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
-                style: const TextStyle(fontSize: 16, color: Colors.black),
+                style: TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: screenHeight * 0.08,
-              ),
-            ),
+            SizedBox(height: 40),
             SizedBox(
-              width: screenWidth * 0.6,
-              height: screenHeight * 0.05,
+              width: 260,
+              height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.teal[700],
-                  padding: EdgeInsets.zero,
-                  alignment: Alignment.center,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/welcome_check',
-                      arguments: _nicknameController.text);
+                onPressed: () async {
+                  try {
+                    UserService userService = UserService();
+                    Map<String, dynamic> result = await userService
+                        .registerUser(_nicknameController.text);
+
+                    print('Result from registerUser: $result');
+
+                    // 등록 성공 시 다음 화면으로 이동
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('등록 성공: ${result['nickname']}')),
+                    );
+                    Navigator.pushNamed(context, '/welcome_check',
+                        arguments: result // 전체 result Map을 전달
+                        );
+                  } catch (e) {
+                    print('Error in onPressed: $e');
+                    // 오류 발생 시 사용자에게 알림
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('오류: $e')),
+                    );
+                  }
                 },
-                child: const Text(
+                child: Text(
                   '등록하기',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     color: Colors.white,
                   ),
                 ),
