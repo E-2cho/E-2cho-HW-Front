@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 class WelcomeCheckScreen extends StatelessWidget {
-  final String nickname;
-
-  const WelcomeCheckScreen({super.key, required this.nickname});
+  const WelcomeCheckScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final String nickname = args['nickname'] as String;
+    final int id = args['id'] as int;
+
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -65,6 +68,13 @@ class WelcomeCheckScreen extends StatelessWidget {
                       color: Colors.greenAccent[400],
                       fontWeight: FontWeight.bold,
                     )),
+                // Text(
+                //   'User ID: $id',
+                //   style: TextStyle(
+                //     fontSize: 24,
+                //     color: Colors.white,
+                //   ),
+                // ),
                 Padding(
                   padding: EdgeInsets.only(
                     top: screenHeight * 0.04,
