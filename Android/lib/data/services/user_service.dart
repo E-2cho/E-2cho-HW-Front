@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../../core/constants/app_constants.dart';
 
 class UserService {
-  static const String baseUrl = 'http://192.168.68.56:8080/api'; // 또는 실제 서버 주소
-
   Future<Map<String, dynamic>> registerUser(String nickname) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/user/registration/nickname'),
+        Uri.parse('${AppConstants.BASE_URL}/user/registration/nickname'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

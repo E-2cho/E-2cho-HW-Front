@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import '../models/device_model.dart';
+import '../../core/constants/app_constants.dart';
 
 class BluetoothService {
   final StreamController<List<DeviceModel>> _devicesStreamController =
@@ -14,14 +15,15 @@ class BluetoothService {
     if (await FlutterBluePlus.adapterState.first == BluetoothAdapterState.on) {
       _discoveredDevices.clear();
 
-      await FlutterBluePlus.startScan(timeout: Duration(seconds: 4));
+      await FlutterBluePlus.startScan(timeout: AppConstants.SCAN_TIMEOUT);
 
       FlutterBluePlus.scanResults.listen((results) {
         for (ScanResult r in results) {
           DeviceModel device = DeviceModel.fromScanResult(r);
-          if (device.name.toLowerCase().startsWith('e_2cho') &&
+          if (device.name
+                  .toLowerCase()
+                  .startsWith(AppConstants.E2CHO_DEVICE_PREFIX) &&
               !_discoveredDevices.contains(device)) {
-            print('Found e_2cho device: ${device.name}'); // 디버그 로그 추가
             _discoveredDevices.add(device);
             _devicesStreamController.add(_discoveredDevices);
           }
@@ -42,8 +44,7 @@ class BluetoothService {
       device.isConnected = true;
       _devicesStreamController.add(_discoveredDevices);
     } catch (e) {
-      print('Error connecting to device: $e');
-      throw Exception('Failed to connect to device');
+      throw Exception('Failed to connect to device: $e');
     }
   }
 
@@ -53,8 +54,7 @@ class BluetoothService {
       device.isConnected = false;
       _devicesStreamController.add(_discoveredDevices);
     } catch (e) {
-      print('Error disconnecting from device: $e');
-      throw Exception('Failed to disconnect from device');
+      throw Exception('Failed to disconnect from device: $e');
     }
   }
 

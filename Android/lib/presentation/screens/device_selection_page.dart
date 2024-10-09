@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/device_model.dart';
+import '../../data/models/device_model.dart';
 
 class DeviceSelectionPage extends StatefulWidget {
   final List<DeviceModel> devices;
